@@ -6,14 +6,17 @@
 #    By: fpetras <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/15 07:29:36 by fpetras           #+#    #+#              #
-#    Updated: 2018/02/18 10:18:17 by fpetras          ###   ########.fr        #
+#    Updated: 2018/02/21 11:25:09 by fpetras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fpetras.filler
 
 SRC = main.c \
-	  get_map_and_piece.c \
+	  map_piece_data.c \
+	  place_piece.c \
+	  attack_horizontal.c \
+	  attack_vertical.c \
 	  validate_position.c \
 	  ft_free_tab.c
 
