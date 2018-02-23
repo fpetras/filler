@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 08:00:00 by fpetras           #+#    #+#             */
-/*   Updated: 2018/02/21 10:50:24 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/02/23 15:44:10 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ static int		ft_get_player_check_error(t_filler *f)
 
 static t_filler	*ft_init_struct(t_filler *f)
 {
-	f = (t_filler*)malloc(sizeof(t_filler));
+	if (!(f = (t_filler*)malloc(sizeof(t_filler))))
+		return (NULL);
 	f->my_piece = 0;
 	f->enemy_piece = 0;
 	f->map_height = 0;
@@ -66,7 +67,8 @@ int				main(void)
 
 	game = 1;
 	f = NULL;
-	f = ft_init_struct(f);
+	if (!(f = ft_init_struct(f)))
+		return (-1);
 	if (ft_get_player_check_error(f) == -1)
 		return (-1);
 	while (game != 4)

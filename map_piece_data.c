@@ -6,7 +6,7 @@
 /*   By: fpetras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 09:38:00 by fpetras           #+#    #+#             */
-/*   Updated: 2018/02/21 14:08:47 by fpetras          ###   ########.fr       */
+/*   Updated: 2018/02/23 15:45:00 by fpetras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int				ft_piece_info(t_filler *f)
 	free(line);
 	if (f->piece_height > f->map_height || f->piece_width > f->map_width)
 		ft_dprintf(2, "Error: Piece too big\n");
-	f->piece = (char**)malloc(sizeof(char*) * (f->piece_height + 1));
+	if (!(f->piece = (char**)malloc(sizeof(char*) * (f->piece_height + 1))))
+		return (-1);
 	i = 0;
 	while (i < f->piece_height && get_next_line(0, &line))
 	{
@@ -62,7 +63,8 @@ int				ft_map_info(t_filler *f)
 	free(line);
 	if (f->map_height > 999 || f->map_width > 999)
 		ft_dprintf(2, "Error: Map too big\n");
-	f->map = (char**)malloc(sizeof(char*) * (f->map_height + 1));
+	if (!(f->map = (char**)malloc(sizeof(char*) * (f->map_height + 1))))
+		return (-1);
 	i = 0;
 	ft_skip_line();
 	while (i < f->map_height && get_next_line(0, &line))
