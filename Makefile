@@ -6,7 +6,7 @@
 #    By: fpetras <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/15 07:29:36 by fpetras           #+#    #+#              #
-#    Updated: 2018/02/21 11:25:09 by fpetras          ###   ########.fr        #
+#    Updated: 2018/04/24 12:09:29 by fpetras          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,24 +20,49 @@ SRC = main.c \
 	  validate_position.c \
 	  ft_free_tab.c
 
-OBJ = $(SRC:.c=.o)
+OBJPATH = obj/
+OBJ = $(addprefix $(OBJPATH),$(SRC:.c=.o))
 
 CC = gcc
+CFLAGS = -Wall -Werror -Wextra
 
-FLAGS = -Wall -Werror -Wextra
+# ----- ANSI Escape Sequences ----- #
+RED = \033[1;31m
+GREEN = \033[1;32m
+YELLOW = \033[1;33m
+BLUE = \033[1;34m
+PURPLE = \033[1;35m
+CYAN = \033[1;36m
+WHITE = \033[1;37m
+UNDERLINE = \033[0;4m
+TEXT_RESET = \033[0;0m
+# --------------------------------- #
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(OBJ)
+	@echo "$(TEXT_RESET)"
+	@echo "$(UNDERLINE)libft:$(TEXT_RESET)"
+	@echo "$(BLUE)"
 	@make -C libft
-	@$(CC) $(FLAGS) -o $(NAME) $(SRC) libft/libft.a
+	@echo "$(TEXT_RESET)"
+	@echo "Generating executable file:\n$(WHITE)$@\n$(TEXT_RESET)"
+	@$(CC) $(CFLAGS) $(SRC) -o $(NAME) libft/libft.a
+	@echo "$(GREEN)Success$(TEXT_RESET)"
+
+$(OBJPATH)%.o: %.c
+	@test -d $(OBJPATH) || mkdir $(OBJPATH)
+	@echo "$(CYAN)Compiling $<"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@make clean -C libft
-	@rm -f $(OBJ)
+	@rm -rf $(OBJPATH)
 
 fclean: clean
 	@make fclean -C libft
 	@rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re
