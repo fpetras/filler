@@ -10,6 +10,7 @@ fpetras.filler
 
 # Debug files
 *.dSYM/
+*filler.trace
 
 # OS generated files
 .DS_Store
