@@ -1,6 +1,7 @@
+#!/bin/sh
 if [ -z "$1" ]
 then
-	echo "usage: sh run_map01.sh [number]"
+	echo "usage: $0 [number]"
 else
 	echo "champely matches in progress..."
 	for i in `seq $1`; do sh map01/champely_script.sh; done
