@@ -11,6 +11,7 @@ fpetras.filler
 # Debug files
 *.dSYM/
 *filler.trace
+*.result
 
 # OS generated files
 .DS_Store
